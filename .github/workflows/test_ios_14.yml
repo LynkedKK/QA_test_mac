@@ -95,13 +95,6 @@ jobs:
 
           cd -
 
-      - uses: louiscklaw/fastmac-tryout/ssh@master
-        with:
-          ssh_key: ${{ secrets.SSH_KEY }}
-          key_file: id_ecdsa
-          wk_dir: louis_ssh
-
-
       - name: Upload Test Results
         continue-on-error: true
         uses: actions/upload-artifact@v1

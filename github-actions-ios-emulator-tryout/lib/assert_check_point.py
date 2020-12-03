@@ -29,7 +29,6 @@ def assertCheckPoint(driver ,check_point_name, error_message, fail_threshold=0.0
   actual_screenshot_path=getActualScreenshotPath(check_point_name)
   expected_screenshot_path=getExpectedScreenshotPath(check_point_name)
 
-  assert False, actual_screenshot_path
 
   takeScreenshot(driver, actual_screenshot_path)
 

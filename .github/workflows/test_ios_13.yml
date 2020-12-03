@@ -98,9 +98,10 @@ jobs:
           path: |
             github-actions-ios-emulator-tryout
 
-      # - name: Upload Test Results
-      #   uses: actions/upload-artifact@v1
-      #   with:
-      #     name: logs
-      #     path: |
-      #       github-actions-ios-emulator-tryout/*.log
+      - name: Upload Test Results
+        continue-on-error: true
+        uses: actions/upload-artifact@v1
+        with:
+          name: logs
+          path: |
+            github-actions-ios-emulator-tryout/*.log

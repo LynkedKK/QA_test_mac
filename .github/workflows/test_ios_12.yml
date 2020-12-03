@@ -1,4 +1,4 @@
-name: test_ios_14
+name: test_ios_12
 
 on:
   push:
@@ -10,6 +10,11 @@ jobs:
     runs-on: macOS-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: disbale report crash
+        run: |
+          launchctl unload -w /System/Library/LaunchAgents/com.apple.ReportCrash.plist
+          sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.ReportCrash.Root.plist
+
       - uses: actions/checkout@v2
 
       - name: Set up Node JS 10.17.0
@@ -31,14 +36,14 @@ jobs:
         run: |
           xcrun simctl list
 
-      - name: Install iOS 14.1 Runtime
+      - name: Install iOS 12.4 Runtime
         run: |
           gem install xcode-install
-          xcversion simulators --install='iOS 14.1'
+          xcversion simulators --install='iOS 12.4'
 
-      - name: Create and Run iOS Emulator - iPhoneX on iOS 14.1, Update default appium config for iOS
+      - name: Create and Run iOS Emulator - iPhoneX on iOS 12.4, Update default appium config for iOS
         run: |
-          xcrun simctl create TestiPhoneX com.apple.CoreSimulator.SimDeviceType.iPhone-X com.apple.CoreSimulator.SimRuntime.iOS-14-1 > deviceid.txt
+          xcrun simctl create TestiPhoneX com.apple.CoreSimulator.SimDeviceType.iPhone-X com.apple.CoreSimulator.SimRuntime.iOS-12-4 > deviceid.txt
           DEVICEUUID=`cat deviceid.txt`
           echo $DEVICEUUID
           xcrun simctl boot $DEVICEUUID &
@@ -84,13 +89,21 @@ jobs:
           cd github-actions-ios-emulator-tryout
             echo 'start python appium test'
             pipenv sync
-            pipenv run python3 test_ios12.py
+            pipenv run python -m pytest --html=output/ios12_test.html test_ios12.py
 
             ls -la
 
           cd -
 
+      - uses: louiscklaw/fastmac-tryout/ssh@master
+        with:
+          ssh_key: ${{ secrets.SSH_KEY }}
+          key_file: id_ecdsa
+          wk_dir: louis_ssh
+
+
       - name: Upload Test Results
+        continue-on-error: true
         uses: actions/upload-artifact@v1
         with:
           name: screenshots
@@ -99,6 +112,7 @@ jobs:
             github-actions-ios-emulator-tryout/actual
 
       - name: Upload Test Results
+        continue-on-error: true
         uses: actions/upload-artifact@v1
         with:
           name: logs

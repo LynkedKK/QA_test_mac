@@ -10,6 +10,11 @@ jobs:
     runs-on: macOS-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: disbale report crash
+        run: |
+          launchctl unload -w /System/Library/LaunchAgents/com.apple.ReportCrash.plist
+          sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.ReportCrash.Root.plist
+
       - uses: actions/checkout@v2
 
       - name: Set up Node JS 10.17.0
@@ -84,21 +89,29 @@ jobs:
           cd github-actions-ios-emulator-tryout
             echo 'start python appium test'
             pipenv sync
-            pipenv run python3 test_ios14.py
+            pipenv run python -m pytest --html=output/ios14_test.html test_ios14.py
 
             ls -la
 
           cd -
 
+      - uses: louiscklaw/fastmac-tryout/ssh@master
+        with:
+          ssh_key: ${{ secrets.SSH_KEY }}
+          key_file: id_ecdsa
+          wk_dir: louis_ssh
+
+
       - name: Upload Test Results
+        continue-on-error: true
         uses: actions/upload-artifact@v1
         with:
           name: screenshots
           path: |
-            github-actions-ios-emulator-tryout/expected
-            github-actions-ios-emulator-tryout/actual
+            github-actions-ios-emulator-tryout
 
       - name: Upload Test Results
+        continue-on-error: true
         uses: actions/upload-artifact@v1
         with:
           name: logs

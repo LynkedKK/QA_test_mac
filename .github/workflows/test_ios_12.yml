@@ -1,4 +1,4 @@
-name: test_ios_14
+name: test_ios_12
 
 on:
   push:

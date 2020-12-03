@@ -1,0 +1,92 @@
+name: ios-emulator-test-14
+
+on:
+  push:
+    branches:
+      - test/*
+
+jobs:
+  build:
+    runs-on: macOS-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node JS 10.17.0
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.17.0'
+      - name: Clean Packages
+        run: |
+          rm -rf node_modules
+          npm cache clean --force
+          rm -rf package-lock.json
+      - name: Install React Native CLI
+        run: |
+          npm install react-native-cli
+      - name: List iOS Devices & Platforms
+        run: |
+          xcrun simctl list
+      - name: Install iOS 14.1 Runtime
+        run: |
+          gem install xcode-install
+          xcversion simulators --install='iOS 14.1'
+      - name: Create and Run iOS Emulator - iPhoneX on iOS 14.1, Update default appium config for iOS
+        run: |
+          xcrun simctl create TestiPhoneX com.apple.CoreSimulator.SimDeviceType.iPhone-X com.apple.CoreSimulator.SimRuntime.iOS-14-1 > deviceid.txt
+          DEVICEUUID=`cat deviceid.txt`
+          echo $DEVICEUUID
+          sed -i -e "s/{IPHONE_UUID}/$DEVICEUUID/g" __tests__/e2e/template_appium_configs_ios.js
+          xcrun simctl boot $DEVICEUUID &
+      - name: Use HTTPS repos
+        run: |
+          git config --global url."https://github".insteadOf ssh://git@github
+      - name: Install Repo and Dependencies
+        run: |
+          brew install ffmpeg
+
+          cd github-actions-ios-emulator-tryout
+            npm install --save-dev
+            npm install appium-doctor
+            ./node_modules/.bin/appium-doctor
+          cd -
+
+      # Start the Appium Server
+      - name: Start the Appium Server
+        run: |
+          cd github-actions-ios-emulator-tryout
+            ./node_modules/.bin/appium --log-timestamp --log-no-colors --allow-insecure chromedriver_autodownload > appium.log &
+          cd -
+      - name: Poll for Appium Server to Start
+        run: |
+          sleep 60
+
+      - name: check python version
+        run: |
+          python3 -V
+          python3 -m pip install pip --upgrade
+          python3 -m pip install pipenv
+          pipenv --version
+
+      - name: python appium test
+        run: |
+          cd github-actions-ios-emulator-tryout
+            echo 'start python appium test'
+            pipenv sync
+            pipenv run python3 appium-helloworld-14.py
+
+            ls -la
+
+          cd -
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v1
+        with:
+          name: screenshot
+          path: github-actions-ios-emulator-tryout/screens
+
+      - name: Upload logs
+        uses: actions/upload-artifact@v1
+        with:
+          name: logs
+          path: github-actions-ios-emulator-tryout

@@ -3,7 +3,7 @@ name: test_ios_14
 on:
   push:
     branches:
-      - test/ios-14/helloworld
+      - test/ios-12/helloworld
 
 jobs:
   build:

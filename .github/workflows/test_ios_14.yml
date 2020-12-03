@@ -2,6 +2,8 @@ name: ios-emulator-test-14
 
 on:
   push:
+    branches:
+      - test/*
 
 jobs:
   build:

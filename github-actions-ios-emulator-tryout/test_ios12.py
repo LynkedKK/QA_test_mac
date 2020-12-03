@@ -15,7 +15,7 @@ SCREEN_CAPTURE_DIR='{}/screens'.format(CURR_DIR)
 
 desired_caps = dict(
     platformName='iOS',
-    platformVersion='14.1',
+    platformVersion='12.4',
     automationName='xcuitest',
     deviceName='iPhone Simulator',
     # app=PATH('../../apps/UICatalog.app.zip')
@@ -46,7 +46,7 @@ def test_IOS14():
     sleep(15)
     driver.switch_to.context(driver.contexts[1])
     writeLog('safariConsole_louislabs.log', json.dumps(driver.get_log('safariConsole')))
-    assertCheckPoint(driver, 'TID_001_1', ERROR_MESSAGE)
+    assertCheckPoint(driver, 'TID_001_1_IOS12', ERROR_MESSAGE)
 
     # # https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending
     # driver.get('https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending');

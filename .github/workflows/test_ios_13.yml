@@ -91,6 +91,7 @@ jobs:
           cd -
 
       - name: Upload Test Results
+        continue-on-error: true
         uses: actions/upload-artifact@v1
         with:
           name: screenshots

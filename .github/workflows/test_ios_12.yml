@@ -104,13 +104,13 @@ jobs:
           git config --global user.name "louiscklaw"
           git clone https://louiscklaw:$LOUISCKLAW_GITHUB_TOKEN@github.com/LynkedKK/QA_test_result.git --branch=master QA_test_result
 
-          cp -r github-actions-ios-emulator-tryout/output_ios14/  QA_test_result/ios14
+          cp -r github-actions-ios-emulator-tryout/output_ios12/  QA_test_result/ios12
 
           ls -l QA_test_result
 
           cd QA_test_result
             git add .
-            git commit -m"update routine result from ios14,"
+            git commit -m"update routine result from ios12,"
             git push
 
       - name: Upload Test Results

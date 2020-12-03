@@ -4,6 +4,8 @@ set -ex
 
 rm -rf github-actions-ios-emulator-tryout/.pytest_cache
 
+git fetch --all
+
 git pull
 
 cd github-actions-ios-emulator-tryout

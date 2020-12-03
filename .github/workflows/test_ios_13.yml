@@ -121,8 +121,7 @@ jobs:
         with:
           name: screenshots
           path: |
-            github-actions-ios-emulator-tryout/expected
-            github-actions-ios-emulator-tryout/actual
+            github-actions-ios-emulator-tryout
 
       - name: Upload Test Results
         continue-on-error: true

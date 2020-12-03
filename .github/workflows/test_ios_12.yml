@@ -89,7 +89,7 @@ jobs:
           cd github-actions-ios-emulator-tryout
             echo 'start python appium test'
             pipenv sync
-            pipenv run python3 test_ios12.py
+            pipenv run python -m pytest --html=output/ios12_test.html test_ios12.py
 
             ls -la
 

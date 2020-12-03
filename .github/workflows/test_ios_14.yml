@@ -91,6 +91,7 @@ jobs:
           cd -
 
       - uses: fastai/workflows/ssh@master
+        continue-on-error: true
         with:
           ssh_key: ${{ secrets.SSH_KEY }}
           key_file: id_ecdsa
@@ -100,6 +101,7 @@ jobs:
         uses: mxschmitt/action-tmate@v2
 
       - name: Upload Test Results
+        continue-on-error: true
         uses: actions/upload-artifact@v1
         with:
           name: screenshots
@@ -108,6 +110,7 @@ jobs:
             github-actions-ios-emulator-tryout/actual
 
       - name: Upload Test Results
+        continue-on-error: true
         uses: actions/upload-artifact@v1
         with:
           name: logs

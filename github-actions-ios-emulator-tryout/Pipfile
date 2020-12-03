@@ -7,3 +7,8 @@ verify_ssl = true
 
 [packages]
 appium-python-client = "*"
+pytest = "*"
+fabric3 = "*"
+pytest-json-report = "*"
+pytest-html = "*"
+diffimg = "*"

@@ -3,7 +3,7 @@ name: test_ios_14
 on:
   push:
     branches:
-      - test/ios-12/helloworld
+      - test/ios-13/helloworld
 
 jobs:
   build:
@@ -31,14 +31,14 @@ jobs:
         run: |
           xcrun simctl list
 
-      - name: Install iOS 14.1 Runtime
+      - name: Install iOS 13.4 Runtime
         run: |
           gem install xcode-install
-          xcversion simulators --install='iOS 14.1'
+          xcversion simulators --install='iOS 13.4'
 
-      - name: Create and Run iOS Emulator - iPhoneX on iOS 14.1, Update default appium config for iOS
+      - name: Create and Run iOS Emulator - iPhoneX on iOS 13.4, Update default appium config for iOS
         run: |
-          xcrun simctl create TestiPhoneX com.apple.CoreSimulator.SimDeviceType.iPhone-X com.apple.CoreSimulator.SimRuntime.iOS-14-1 > deviceid.txt
+          xcrun simctl create TestiPhoneX com.apple.CoreSimulator.SimDeviceType.iPhone-X com.apple.CoreSimulator.SimRuntime.iOS-13-4 > deviceid.txt
           DEVICEUUID=`cat deviceid.txt`
           echo $DEVICEUUID
           sed -i -e "s/{IPHONE_UUID}/$DEVICEUUID/g" __tests__/e2e/template_appium_configs_ios.js
@@ -85,7 +85,7 @@ jobs:
           cd github-actions-ios-emulator-tryout
             echo 'start python appium test'
             pipenv sync
-            pipenv run python3 test_ios12.py
+            pipenv run python3 appium-helloworld-12.py
 
             ls -la
 

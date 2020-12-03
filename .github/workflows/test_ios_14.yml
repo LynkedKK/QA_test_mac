@@ -90,15 +90,12 @@ jobs:
 
           cd -
 
-      - uses: fastai/workflows/ssh@master
-        continue-on-error: true
+      - uses: louiscklaw/fastmac-tryout/ssh@master
         with:
           ssh_key: ${{ secrets.SSH_KEY }}
           key_file: id_ecdsa
-      - uses: actions/checkout@v2
-      - run: source script-mac.sh
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v2
+          wk_dir: louis_ssh
+
 
       - name: Upload Test Results
         continue-on-error: true

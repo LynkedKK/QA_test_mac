@@ -75,11 +75,8 @@ def test_IOS14():
     # # el = driver.find_element_by_accessibility_id('item')
     # # el.click()
 
-
-
     browser=''
     # assertCheckPoint(browser, 'TID_001_1', ERROR_MESSAGE)
-
 
   finally:
     print('done')

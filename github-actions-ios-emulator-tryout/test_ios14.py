@@ -48,35 +48,35 @@ def test_IOS14():
     writeLog('safariConsole_louislabs.log', json.dumps(driver.get_log('safariConsole')))
     assertCheckPoint(driver, 'TID_001_1_IOS14', ERROR_MESSAGE)
 
-    # # https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending
-    # driver.get('https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending');
-    # getScreenShot(driver, '{}/check_browser.png'.format(SCREEN_CAPTURE_DIR))
+    # https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending
+    driver.get('https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending');
+    getScreenShot(driver, '{}/check_browser.png'.format(SCREEN_CAPTURE_DIR))
+    assertCheckPoint(driver, 'TID_001_2_IOS14', ERROR_MESSAGE)
 
 
+    driver.get('http://menymeny.com/manage/%E3%82%84%E3%81%8D%E3%81%A8%E3%82%8A/')
+    sleep(5)
+    getScreenShot(driver, '{}/menymeny_manage_screenshot.png'.format(SCREEN_CAPTURE_DIR))
+    writeLog('safariConsole_manage.log', json.dumps(driver.get_log('safariConsole')))
+    assertCheckPoint(driver, 'TID_001_3_IOS14', ERROR_MESSAGE)
 
-    # driver.get('http://menymeny.com/manage/%E3%82%84%E3%81%8D%E3%81%A8%E3%82%8A/')
-    # sleep(30)
-    # getScreenShot(driver, '{}/menymeny_manage_screenshot.png'.format(SCREEN_CAPTURE_DIR))
-    # writeLog('safariConsole_manage.log', json.dumps(driver.get_log('safariConsole')))
+    driver.get('http://menymeny.com/admin/')
+    sleep(5)
+    getScreenShot(driver, '{}/menymeny_admin_screenshot.png'.format(SCREEN_CAPTURE_DIR))
+    writeLog('safariConsole_admin.log', json.dumps(driver.get_log('safariConsole')))
+    assertCheckPoint(driver, 'TID_001_4_IOS14', ERROR_MESSAGE)
 
-    # driver.get('http://menymeny.com/admin/')
-    # sleep(30)
-    # getScreenShot(driver, '{}/menymeny_admin_screenshot.png'.format(SCREEN_CAPTURE_DIR))
-    # writeLog('safariConsole_admin.log', json.dumps(driver.get_log('safariConsole')))
-
-    # driver.get('http://menymeny.com/food/%E3%82%84%E3%81%8D%E3%81%A8%E3%82%8A/')
-    # sleep(30)
-    # getScreenShot(driver, '{}/menymeny_food_screenshot.png'.format(SCREEN_CAPTURE_DIR))
-    # writeLog('safariConsole_food.log', json.dumps(driver.get_log('safariConsole')))
+    driver.get('http://menymeny.com/food/%E3%82%84%E3%81%8D%E3%81%A8%E3%82%8A/')
+    sleep(5)
+    getScreenShot(driver, '{}/menymeny_food_screenshot.png'.format(SCREEN_CAPTURE_DIR))
+    writeLog('safariConsole_food.log', json.dumps(driver.get_log('safariConsole')))
+    assertCheckPoint(driver, 'TID_001_5_IOS14', ERROR_MESSAGE)
 
     # # el = driver.find_element_by_accessibility_id('item')
     # # el.click()
 
-
-
     browser=''
     # assertCheckPoint(browser, 'TID_001_1', ERROR_MESSAGE)
-
 
   finally:
     print('done')

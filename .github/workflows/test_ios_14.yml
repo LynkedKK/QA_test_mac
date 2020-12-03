@@ -10,6 +10,11 @@ jobs:
     runs-on: macOS-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: disbale report crash
+        run: |
+          launchctl unload -w /System/Library/LaunchAgents/com.apple.ReportCrash.plist
+          sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.ReportCrash.Root.plist
+
       - uses: actions/checkout@v2
 
       - name: Set up Node JS 10.17.0

@@ -119,7 +119,7 @@ jobs:
         with:
           name: screenshots
           path: |
-            github-actions-ios-emulator-tryout/output_ios12
+            github-actions-ios-emulator-tryout/actual
 
       - name: Upload Test Results
 

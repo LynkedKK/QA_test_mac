@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - test/ios-12/helloworld
-  schedule:
-    - cron:  '0 */1 * * *	'
 
 jobs:
   build:
@@ -91,7 +89,7 @@ jobs:
           cd github-actions-ios-emulator-tryout
             echo 'start python appium test'
             pipenv sync
-            pipenv run python -m pytest --html=output/ios12_test.html test_ios12.py
+            pipenv run python -m pytest --html=output_ios12/index.html test_ios12.py
 
             ls -la
 

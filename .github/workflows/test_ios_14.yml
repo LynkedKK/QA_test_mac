@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - test/ios-14/helloworld
-      - master
-
-  schedule:
-    - cron:  '0 */1 * * *	'
 
 jobs:
   build:

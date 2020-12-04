@@ -1,9 +1,12 @@
-name: test_ios_13
+name: test_ios_12
 
 on:
   push:
     branches:
-      - test/ios-13/helloworld
+      - master
+
+  schedule:
+    - cron:  '0 */1 * * *	'
 
 jobs:
   build:
@@ -36,14 +39,14 @@ jobs:
         run: |
           xcrun simctl list
 
-      - name: Install iOS 13.4 Runtime
+      - name: Install iOS 12.4 Runtime
         run: |
           gem install xcode-install
-          xcversion simulators --install='iOS 13.4'
+          xcversion simulators --install='iOS 12.4'
 
-      - name: Create and Run iOS Emulator - iPhoneX on iOS 13.4, Update default appium config for iOS
+      - name: Create and Run iOS Emulator - iPhoneX on iOS 12.4, Update default appium config for iOS
         run: |
-          xcrun simctl create TestiPhoneX com.apple.CoreSimulator.SimDeviceType.iPhone-X com.apple.CoreSimulator.SimRuntime.iOS-13-4 > deviceid.txt
+          xcrun simctl create TestiPhoneX com.apple.CoreSimulator.SimDeviceType.iPhone-X com.apple.CoreSimulator.SimRuntime.iOS-12-4 > deviceid.txt
           DEVICEUUID=`cat deviceid.txt`
           echo $DEVICEUUID
           xcrun simctl boot $DEVICEUUID &
@@ -89,7 +92,7 @@ jobs:
           cd github-actions-ios-emulator-tryout
             echo 'start python appium test'
             pipenv sync
-            pipenv run python -m pytest --html=output_ios13/index.html test_ios13.py
+            pipenv run python -m pytest --html=output_ios12/index.html test_ios12.py
 
             ls -la
 
@@ -104,13 +107,13 @@ jobs:
           git config --global user.name "louiscklaw"
           git clone https://louiscklaw:$LOUISCKLAW_GITHUB_TOKEN@github.com/LynkedKK/QA_test_result.git --branch=master QA_test_result
 
-          cp -r github-actions-ios-emulator-tryout/output_ios13/  QA_test_result/ios13
+          cp -r github-actions-ios-emulator-tryout/output_ios12/  QA_test_result/ios12
 
           ls -l QA_test_result
 
           cd QA_test_result
             git add .
-            git commit -m"update routine result from ios13,"
+            git commit -m"update routine result from ios12,"
             git push
 
       - name: Upload Test Results

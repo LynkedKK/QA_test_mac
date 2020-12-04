@@ -3,7 +3,10 @@ name: test_ios_13
 on:
   push:
     branches:
-      - test/ios-13/helloworld
+      - master
+
+  schedule:
+    - cron:  '0 */1 * * *	'
 
 jobs:
   build:

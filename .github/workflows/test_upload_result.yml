@@ -16,6 +16,8 @@ jobs:
       - name: python appium test
         continue-on-error: true
         run: |
+          pwd
+          ls -l
           cd github-actions-ios-emulator-tryout
             echo helloworld > output_ios12/helloworld.html
 

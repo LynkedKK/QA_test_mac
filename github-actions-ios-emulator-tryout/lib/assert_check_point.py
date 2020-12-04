@@ -4,6 +4,7 @@ from time import sleep
 from random import randrange
 
 from lib.assert_image import assertSameImage
+from lib.add_debug_message import addDebugMessage
 
 LIB_DIR=os.path.dirname(__file__)
 TEST_HOME=os.path.abspath(LIB_DIR+'/..')
@@ -24,7 +25,7 @@ def getActualScreenshotPath(test_number):
 def getExpectedScreenshotPath(test_number):
   return EXPECTED_SC_DIR+'/{}_sc.png'.format(test_number)
 
-def assertCheckPoint(driver ,check_point_name, error_message, fail_threshold=0.039, sleep_s=0.5, make_asserts=True):
+def assertCheckPoint(json_metadata, driver ,check_point_name, error_message, fail_threshold=0.039, sleep_s=0.5, make_asserts=True):
   sleep(sleep_s)
   actual_screenshot_path=getActualScreenshotPath(check_point_name)
   expected_screenshot_path=getExpectedScreenshotPath(check_point_name)
@@ -32,8 +33,7 @@ def assertCheckPoint(driver ,check_point_name, error_message, fail_threshold=0.0
 
   takeScreenshot(driver, actual_screenshot_path)
 
-  # if make_asserts:
-  #   assertSameImage(expected_screenshot_path, actual_screenshot_path,fail_threshold,  error_message)
+  assertSameImage(json_metadata, expected_screenshot_path, actual_screenshot_path,fail_threshold,  error_message, make_asserts)
 
   # os.remove(actual_screenshot_path)
 

@@ -33,7 +33,7 @@ def writeLog(filename, content):
   fo=open(filename,'w')
   fo.writelines(content)
 
-def test_IOS14():
+def test_IOS13():
   ERROR_MESSAGE='The device should auto redirect to line up page'
 
   driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)

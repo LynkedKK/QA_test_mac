@@ -3,8 +3,7 @@ name: test_ios_14
 on:
   push:
     branches:
-      - test/ios-14/helloworld
-      - master
+      - test/upload-result/helloworld
 
   schedule:
     - cron:  '0 */1 * * *	'

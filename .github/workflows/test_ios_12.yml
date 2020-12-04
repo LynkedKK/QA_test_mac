@@ -53,7 +53,7 @@ jobs:
           git config --global url."https://github".insteadOf ssh://git@github
 
       - name: Install Repo and Dependencies
-        continue-on-error: true
+
         run: |
           brew install ffmpeg
 
@@ -65,7 +65,7 @@ jobs:
 
       # Start the Appium Server
       - name: Start the Appium Server
-        continue-on-error: true
+
         run: |
           cd github-actions-ios-emulator-tryout
             ./node_modules/.bin/appium --log-timestamp --log-no-colors --allow-insecure chromedriver_autodownload > appium.log &
@@ -76,7 +76,7 @@ jobs:
           sleep 60
 
       - name: check python version
-        continue-on-error: true
+
         run: |
           python3 -V
           python3 -m pip install pip --upgrade
@@ -84,7 +84,7 @@ jobs:
           pipenv --version
 
       - name: python appium test
-        continue-on-error: true
+
         run: |
           cd github-actions-ios-emulator-tryout
             echo 'start python appium test'
@@ -96,7 +96,7 @@ jobs:
           cd -
 
       - name: update result
-        continue-on-error: true
+
         env:
           LOUISCKLAW_GITHUB_TOKEN: ${{ secrets.LOUISCKLAW_GITHUB_TOKEN }}
         run: |
@@ -114,7 +114,7 @@ jobs:
             git push
 
       - name: Upload Test Results
-        continue-on-error: true
+
         uses: actions/upload-artifact@v2
         with:
           name: screenshots
@@ -122,7 +122,7 @@ jobs:
             github-actions-ios-emulator-tryout
 
       - name: Upload Test Results
-        continue-on-error: true
+
         uses: actions/upload-artifact@v2
         with:
           name: logs

@@ -8,6 +8,10 @@ git fetch --all
 
 git pull
 
-cd github-actions-ios-emulator-tryout
+cd src
   pipenv run python -m pytest --json-report --json-report-file=test_IOS12.json	 --html=./output_ios12/index.html test_json_metadata.py
 cd -
+
+# cd github-actions-ios-emulator-tryout
+#   pipenv run python -m pytest --json-report --json-report-file=test_IOS12.json	 --html=./output_ios12/index.html test_json_metadata.py
+# cd -

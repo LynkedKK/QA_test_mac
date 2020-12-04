@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - test/ios-12/helloworld
+      - master
+
   schedule:
     - cron:  '0 */1 * * *	'
 

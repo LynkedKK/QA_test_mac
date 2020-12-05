@@ -114,10 +114,10 @@ jobs:
             git push
 
       - name: Upload Test Results
-
         uses: actions/upload-artifact@v2
         with:
           name: screenshots
+          retention-days: 1
           path: |
             github-actions-ios-emulator-tryout/output_ios14
 
@@ -126,5 +126,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: logs
+          retention-days: 1
           path: |
             github-actions-ios-emulator-tryout/*.log

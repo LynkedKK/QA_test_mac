@@ -19,4 +19,4 @@ jobs:
     - name: Remove old artifacts
       uses: c-hive/gha-remove-artifacts@v1
       with:
-        age: '${{ inputs.daysToKeep }} day'
+        age: '${{ github.event.inputs.daysToKeep }} day'

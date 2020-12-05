@@ -6,8 +6,7 @@ on:
         description: 'days to keep'
         required: true
         default: '3'
-      tags:
-        description: 'days artifacts to keep'
+
   # schedule:
   #   - cron: '0 1 * * *' # every night at 1 am UTC
 
@@ -20,4 +19,4 @@ jobs:
     - name: Remove old artifacts
       uses: c-hive/gha-remove-artifacts@v1
       with:
-        age: '${{ input.daysToKeep }} day'
+        age: '${{ inputs.daysToKeep }} day'

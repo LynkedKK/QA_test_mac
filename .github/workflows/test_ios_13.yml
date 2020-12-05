@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - test/ios-13/helloworld
+  workflow_dispatch:
 
 jobs:
   build:

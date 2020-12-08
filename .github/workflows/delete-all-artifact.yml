@@ -1,0 +1,22 @@
+name: 'nightly artifacts cleanup'
+on:
+  workflow_dispatch:
+    inputs:
+      daysToKeep:
+        description: 'days to keep'
+        required: true
+        default: '3'
+
+  # schedule:
+  #   - cron: '0 1 * * *' # every night at 1 am UTC
+
+jobs:
+  remove-old-artifacts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+    - name: Remove old artifacts
+      uses: c-hive/gha-remove-artifacts@v1
+      with:
+        age: '${{ github.event.inputs.daysToKeep }} day'
